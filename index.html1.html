@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keep Going! 🌸</title>
+    <style>
+        /* สไตล์พื้นหลังสีชมพูละมุน */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%);
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* สร้างประกายวิบวับ */
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: blink 1.5s infinite ease-in-out;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px white; }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* ปุ่มกดเริ่มต้น */
+        #present-box {
+            font-size: 80px;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #present-box:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* ช่อดอกไม้และข้อความ */
+        .flower-content {
+            display: none; /* ซ่อนไว้ก่อนกด */
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bouquet {
+            font-size: 120px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+        }
+
+        .message {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(214, 51, 132, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .sub-message {
+            color: #d63384;
+            font-size: 18px;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="click-me" onclick="openGift()">
+            <div id="present-box">🎁</div>
+            <p style="color: white; font-weight: bold; cursor: pointer;">Open me!</p>
+        </div>
+
+        <div id="gift-content" class="flower-content">
+            <div class="bouquet">💐</div>
+            <div class="message">KEEP GOING!</div>
+            <div class="sub-message">Believe in yourself, you got this! ✨</div>
+        </div>
+    </div>
+
+    <script>
+        // ฟังก์ชันสุ่มประกายวิบวับทั่วจอ
+        function createStars() {
+            const starContainer = document.body;
+            for (let i = 0; i < 60; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 4 + 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starContainer.appendChild(star);
+            }
+        }
+
+        function openGift() {
+            // ซ่อนกล่องของขวัญ
+            document.getElementById('click-me').classList.add('hidden');
+            // โชว์ดอกไม้
+            document.getElementById('gift-content').style.display = 'block';
+        }
+
+        // เรียกใช้งานฟังก์ชันสร้างดาวทันทีที่โหลดหน้าเว็บ
+        createStars();
+    </script>
+</body>
+</html>
